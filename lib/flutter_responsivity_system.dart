@@ -1,7 +1,4 @@
 library flutter_responsivity_system;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'helpers/responsive_calculations.dart';
+export 'widgets/responsive_text.dart';
