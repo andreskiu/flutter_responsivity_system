@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +12,7 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQueryData) {
 
   var deviceWidth = 0.0;
 
-  print('aspect ratio: ${mediaQueryData.size.aspectRatio}');
-  if (kIsWeb) {
+  if (kIsWeb || Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
     // 2/3 is the worst phone aspect ratio. so if screen is 9/16, 4/5 or 2/3 it will be treated as a phone
     if (mediaQueryData.size.aspectRatio < (2 / 3)) {
       deviceWidth = mediaQueryData.size.height;
