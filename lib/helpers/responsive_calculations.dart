@@ -16,8 +16,8 @@ class ResponsivityHelper {
 
   late double _safeAreaHorizontal;
   late double _safeAreaVertical;
-  double? safeBlockHorizontal;
-  double? safeBlockVertical;
+  static late double safeBlockHorizontal;
+  static late double safeBlockVertical;
 
   static late bool useSPForFontSize;
   static late double screenHeightPxReference;
@@ -84,7 +84,7 @@ class ResponsivityHelper {
     // print('fontSize $fontSize, Resized: $resizedFontSize');
     // return resizedFontSize;
     double _resizedFontSize = fontSize.toDouble();
-
+    // previous android strategy - works fine
     if (Platform.isAndroid) {
       final _factor = (fontSize + 1) / 10;
       _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
@@ -94,5 +94,45 @@ class ResponsivityHelper {
       print(ResponsivityHelper.verticalUnit);
     }
     return _resizedFontSize;
+  }
+}
+
+extension ResponsivityExtension on int {
+  double verticalProportion({
+    bool useSafeArea = false,
+  }) {
+    if (useSafeArea) {
+      return this * ResponsivityHelper.safeBlockVertical;
+    }
+    return this * ResponsivityHelper.verticalUnit;
+  }
+
+  double horizontalProportion({
+    bool useSafeArea = false,
+  }) {
+    if (useSafeArea) {
+      return this * ResponsivityHelper.safeBlockHorizontal;
+    }
+    return this * ResponsivityHelper.horizontalUnit;
+  }
+}
+
+extension ResponsivityExtensionDouble on double {
+  double verticalProportion({
+    bool useSafeArea = false,
+  }) {
+    if (useSafeArea) {
+      return this * ResponsivityHelper.safeBlockVertical;
+    }
+    return this * ResponsivityHelper.verticalUnit;
+  }
+
+  double horizontalProportion({
+    bool useSafeArea = false,
+  }) {
+    if (useSafeArea) {
+      return this * ResponsivityHelper.safeBlockHorizontal;
+    }
+    return this * ResponsivityHelper.horizontalUnit;
   }
 }

@@ -24,8 +24,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         ResponsivityHelper(
           mediaQueryData: MediaQuery.of(context),
-          useSPForFontSizeParam: true,
-          screenHeightPxReferenceParam: 2700,
         );
         return child!;
       },
@@ -62,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsivityHelper.horizontalUnit * 5,
+                  horizontal: 5.horizontalProportion(),
                 ),
                 child: DeviceLayoutSelector(
                   mobileBuilder: () {
@@ -119,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(
-              ResponsivityHelper.horizontalUnit * 2,
+              2.2.verticalProportion(),
+              // ResponsivityHelper.horizontalUnit * 2,
             ),
           ),
         ),

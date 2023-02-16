@@ -26,54 +26,54 @@ class MyPainter extends CustomPainter {
 
     final _path2 = Path();
 
-    _path2.moveTo(0, ResponsivityHelper.verticalUnit * 33);
+    _path2.moveTo(0, 33.verticalProportion());
     _path2.lineTo(
-      ResponsivityHelper.horizontalUnit * 50,
-      ResponsivityHelper.verticalUnit * 50,
+      50.horizontalProportion(),
+      50.verticalProportion(),
     );
     _path2.lineTo(
       ResponsivityHelper.horizontalUnit * 50,
       ResponsivityHelper.verticalUnit * 50,
     );
     _path2.lineTo(
-      ResponsivityHelper.horizontalUnit * 100,
-      ResponsivityHelper.verticalUnit * 33,
+      100.horizontalProportion(),
+      33.verticalProportion(),
     );
     _path2.lineTo(
-      ResponsivityHelper.horizontalUnit * 100,
-      ResponsivityHelper.verticalUnit * 60,
+      100.horizontalProportion(),
+      60.verticalProportion(),
     );
     _path2.lineTo(
       0,
-      ResponsivityHelper.verticalUnit * 60,
+      60.verticalProportion(),
     );
     canvas.drawPath(_path2, paint2);
 
     final _path3 = Path();
 
     _path3.moveTo(
-      ResponsivityHelper.horizontalUnit * 22,
-      ResponsivityHelper.verticalUnit * 60,
+      22.horizontalProportion(),
+      60.verticalProportion(),
     );
     _path3.lineTo(
-      ResponsivityHelper.horizontalUnit * 77,
-      ResponsivityHelper.verticalUnit * 60,
+      77.horizontalProportion(),
+      60.verticalProportion(),
     );
     _path3.lineTo(
-      ResponsivityHelper.horizontalUnit * 100,
-      ResponsivityHelper.verticalUnit * 87,
+      100.horizontalProportion(),
+      87.verticalProportion(),
     );
     _path3.moveTo(
-      ResponsivityHelper.horizontalUnit * 77,
-      ResponsivityHelper.verticalUnit * 60,
+      77.horizontalProportion(),
+      60.verticalProportion(),
     );
     _path3.lineTo(
-      ResponsivityHelper.horizontalUnit * 0,
-      ResponsivityHelper.verticalUnit * 87,
+      0,
+      87.verticalProportion(),
     );
     _path3.lineTo(
-      ResponsivityHelper.horizontalUnit * 22,
-      ResponsivityHelper.verticalUnit * 60,
+      22.horizontalProportion(),
+      60.verticalProportion(),
     );
     canvas.drawPath(_path3, paint3);
   }
