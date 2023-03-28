@@ -8,7 +8,9 @@ enum TextType {
   Headline5,
   Headline6,
   Subtitle1,
+  Subtitle2,
   Body1,
+  Body2,
   Caption,
   ElevatedButton,
   OutlinedButton,
@@ -93,7 +95,7 @@ class ResponsiveInput extends StatefulWidget {
   final void Function()? onIconPressed;
   final void Function()? onTap;
 
-  ResponsiveInput({
+  const ResponsiveInput({
     Key? key,
     this.labelText,
     this.hintText,
@@ -186,7 +188,7 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize - 8),
         ),
-        counter: SizedBox.shrink(),
+        counter: const SizedBox.shrink(),
         labelStyle: calculateTextStyle(
           context,
           textType: TextType.InputFieldLabel,
@@ -352,6 +354,8 @@ TextStyle? calculateTextStyle(
     case TextType.Subtitle1:
       return _textTheme.subtitle1;
 
+    case TextType.Subtitle2:
+      return _textTheme.subtitle2;
     case TextType.Headline1:
       return _textTheme.headline1;
 
@@ -366,6 +370,9 @@ TextStyle? calculateTextStyle(
 
     case TextType.Body1:
       return _textTheme.bodyText1;
+
+    case TextType.Body2:
+      return _textTheme.bodyText2;
 
     case TextType.Caption:
       return _textTheme.caption;
