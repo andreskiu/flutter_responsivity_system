@@ -5,6 +5,8 @@ import '../helpers/responsive_calculations.dart';
 enum TextType {
   headline1,
   headline2,
+  headline3,
+  headline4,
   headline5,
   headline6,
   subtitle1,
@@ -363,6 +365,12 @@ TextStyle? calculateTextStyle(
 
     case TextType.headline2:
       return _textTheme.headline2;
+
+    case TextType.headline3:
+      return _textTheme.headline5;
+
+    case TextType.headline4:
+      return _textTheme.headline5;
 
     case TextType.headline5:
       return _textTheme.headline5;
