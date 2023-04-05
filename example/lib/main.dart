@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         ResponsivityHelper(
           mediaQueryData: MediaQuery.of(context),
+          useDesignSizeAsReference: true,
+          screenReferenceSizeParam: const Size(375, 812),
+          fontSizeModeParam: FontSizeMode.referenceScreenValue,
         );
         return child!;
       },
