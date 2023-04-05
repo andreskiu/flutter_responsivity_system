@@ -128,7 +128,7 @@ enum FontSizeMode {
 }
 
 extension ResponsivityExtension on int {
-  double verticalProportion({
+  double verticalPercent({
     bool useSafeArea = false,
   }) {
     if (useSafeArea) {
@@ -137,7 +137,7 @@ extension ResponsivityExtension on int {
     return this * ResponsivityHelper.verticalUnit;
   }
 
-  double horizontalProportion({
+  double horizontalPercent({
     bool useSafeArea = false,
   }) {
     if (useSafeArea) {
@@ -148,7 +148,7 @@ extension ResponsivityExtension on int {
 }
 
 extension ResponsivityExtensionDouble on double {
-  double verticalProportion({
+  double verticalPercent({
     bool useSafeArea = false,
   }) {
     if (useSafeArea) {
@@ -157,7 +157,7 @@ extension ResponsivityExtensionDouble on double {
     return this * ResponsivityHelper.verticalUnit;
   }
 
-  double horizontalProportion({
+  double horizontalPercent({
     bool useSafeArea = false,
   }) {
     if (useSafeArea) {
