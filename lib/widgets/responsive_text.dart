@@ -3,18 +3,23 @@ import 'package:flutter/services.dart';
 import '../helpers/responsive_calculations.dart';
 
 enum TextType {
-  Headline1,
-  Headline2,
-  Headline5,
-  Headline6,
-  Subtitle1,
-  Body1,
-  Caption,
-  ElevatedButton,
-  OutlinedButton,
-  InputFieldHint,
-  InputFieldError,
-  InputFieldLabel,
+  headline1,
+  headline2,
+  headline3,
+  headline4,
+  headline5,
+  headline6,
+  subtitle1,
+  subtitle2,
+  body1,
+  body2,
+  caption,
+  elevatedButton,
+  outlinedButton,
+  inputFieldHint,
+  inputFieldError,
+  inputFieldLabel,
+  popupMenuItem
 }
 
 double calculateFontSize(int fontSize) {
@@ -38,7 +43,7 @@ class ResponsiveText extends StatelessWidget {
   const ResponsiveText(
     this.text, {
     Key? key,
-    this.textType = TextType.Body1,
+    this.textType = TextType.body1,
     this.fontSize = 26,
     this.textAlign,
     this.color,
@@ -93,7 +98,7 @@ class ResponsiveInput extends StatefulWidget {
   final void Function()? onIconPressed;
   final void Function()? onTap;
 
-  ResponsiveInput({
+  const ResponsiveInput({
     Key? key,
     this.labelText,
     this.hintText,
@@ -155,7 +160,7 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
       obscureText: widget.obscureText,
       style: calculateTextStyle(
         context,
-        textType: TextType.Headline6,
+        textType: TextType.headline6,
       )?.copyWith(
         fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
         color: _focus.hasFocus
@@ -176,20 +181,20 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
         labelText: widget.labelText,
         hintStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldHint,
+          textType: TextType.inputFieldHint,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
         ),
         errorStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldError,
+          textType: TextType.inputFieldError,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize - 8),
         ),
-        counter: SizedBox.shrink(),
+        counter: const SizedBox.shrink(),
         labelStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldLabel,
+          textType: TextType.inputFieldLabel,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
         ),
@@ -278,19 +283,19 @@ class _ResponsiveFormFieldButtonState<T>
         ),
         hintStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldHint,
+          textType: TextType.inputFieldHint,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
         ),
         errorStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldError,
+          textType: TextType.inputFieldError,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize - 4),
         ),
         labelStyle: calculateTextStyle(
           context,
-          textType: TextType.InputFieldLabel,
+          textType: TextType.inputFieldLabel,
         )?.copyWith(
           fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
         ),
@@ -344,50 +349,64 @@ TextStyle? calculateTextStyle(
   final _inputTheme = Theme.of(context).inputDecorationTheme;
   final _outlinedButtonTheme = Theme.of(context).outlinedButtonTheme;
   final _elevatedButtonTheme = Theme.of(context).elevatedButtonTheme;
+  final _popupMenuTheme = Theme.of(context).popupMenuTheme;
 
   switch (textType) {
     case null:
       return null;
 
-    case TextType.Subtitle1:
+    case TextType.subtitle1:
       return _textTheme.subtitle1;
 
-    case TextType.Headline1:
+    case TextType.subtitle2:
+      return _textTheme.subtitle2;
+    case TextType.headline1:
       return _textTheme.headline1;
 
-    case TextType.Headline2:
+    case TextType.headline2:
       return _textTheme.headline2;
 
-    case TextType.Headline5:
+    case TextType.headline3:
       return _textTheme.headline5;
 
-    case TextType.Headline6:
+    case TextType.headline4:
+      return _textTheme.headline5;
+
+    case TextType.headline5:
+      return _textTheme.headline5;
+
+    case TextType.headline6:
       return _textTheme.headline6;
 
-    case TextType.Body1:
+    case TextType.body1:
       return _textTheme.bodyText1;
 
-    case TextType.Caption:
+    case TextType.body2:
+      return _textTheme.bodyText2;
+
+    case TextType.caption:
       return _textTheme.caption;
 
-    case TextType.ElevatedButton:
+    case TextType.elevatedButton:
       return _elevatedButtonTheme.style?.textStyle?.resolve({
-            materialState ?? MaterialState.focused,
-          }) ??
-          null;
+        materialState ?? MaterialState.focused,
+      });
 
-    case TextType.OutlinedButton:
+    case TextType.outlinedButton:
       return _outlinedButtonTheme.style?.textStyle?.resolve({
         materialState ?? MaterialState.focused,
       });
 
-    case TextType.InputFieldHint:
+    case TextType.inputFieldHint:
       return _inputTheme.hintStyle;
 
-    case TextType.InputFieldError:
+    case TextType.inputFieldError:
       return _inputTheme.errorStyle;
 
-    case TextType.InputFieldLabel:
+    case TextType.inputFieldLabel:
       return _inputTheme.labelStyle;
+
+    case TextType.popupMenuItem:
+      return _popupMenuTheme.textStyle;
   }
 }
