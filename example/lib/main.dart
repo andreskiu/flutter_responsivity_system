@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 5.horizontalProportion(),
+                  horizontal: 5.horizontalPercent(),
                 ),
                 child: DeviceLayoutSelector(
                   mobileBuilder: () {
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(
-              2.2.verticalProportion(),
+              2.2.verticalPercent(),
               // ResponsivityHelper.horizontalUnit * 2,
             ),
           ),
