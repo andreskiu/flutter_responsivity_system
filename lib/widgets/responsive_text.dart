@@ -2,49 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../helpers/responsive_calculations.dart';
 
-enum TextType {
-  headline1,
-  headline2,
-  headline3,
-  headline4,
-  headline5,
-  headline6,
-  subtitle1,
-  subtitle2,
-  body1,
-  body2,
-  caption,
-  elevatedButton,
-  outlinedButton,
-  inputFieldHint,
-  inputFieldError,
-  inputFieldLabel,
-  popupMenuItem
-}
-
-double calculateFontSize(int fontSize) {
-  final _factor = (fontSize + 1) / 10;
-  final _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
-  return _resizedFontSize;
-}
+// enum TextType {
+//   headline1,
+//   headline2,
+//   headline3,
+//   headline4,
+//   headline5,
+//   headline6,
+//   subtitle1,
+//   subtitle2,
+//   body1,
+//   body2,
+//   caption,
+//   elevatedButton,
+//   outlinedButton,
+//   inputFieldHint,
+//   inputFieldError,
+//   inputFieldLabel,
+//   popupMenuItem
+// }
 
 class ResponsiveText extends StatelessWidget {
   final String text;
-  final TextType textType;
   final TextAlign? textAlign;
+
+  /// just a quick access. will be ignored if textStyle is provided
   final Color? color;
+
+  /// just a quick access. will be ignored if textStyle is provided
   final FontWeight? fontWeight;
   final TextOverflow? overflow;
   final int? maxLines;
-  final int fontSize;
+  final double fontSize;
   final TextStyle? textStyle;
   final MaterialState? materialState;
+  final bool? softWrap;
 
   const ResponsiveText(
     this.text, {
     Key? key,
-    this.textType = TextType.body1,
-    this.fontSize = 26,
+    this.fontSize = 14,
     this.textAlign,
     this.color,
     this.fontWeight,
@@ -52,24 +49,36 @@ class ResponsiveText extends StatelessWidget {
     this.maxLines,
     this.textStyle,
     this.materialState,
+    this.softWrap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: calculateTextStyle(
-        context,
-        textType: textType,
-        materialState: materialState,
-      )?.copyWith(
-        fontSize: ResponsivityHelper.responsiveFontSize(fontSize),
-        color: color,
-        fontWeight: fontWeight,
-      ),
+      style: textStyle != null
+          ? textStyle!.copyWith(
+              fontSize: ResponsivityHelper.responsiveFontSize(fontSize),
+            )
+          : TextStyle(
+              fontSize: ResponsivityHelper.responsiveFontSize(fontSize),
+              color: color,
+              fontWeight: fontWeight,
+            ),
+
+      // calculateTextStyle(
+      //     context,
+      //     textType: textType,
+      //     materialState: materialState,
+      //   )?.copyWith(
+      //     fontSize: ResponsivityHelper.responsiveFontSize(fontSize),
+      //     color: color,
+      //     fontWeight: fontWeight,
+      //   ),
       overflow: overflow,
       maxLines: maxLines,
       textAlign: textAlign,
+      softWrap: softWrap,
     );
   }
 }
@@ -82,11 +91,15 @@ class ResponsiveInput extends StatefulWidget {
   final bool obscureText;
   final bool isDense;
   final bool enabled;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
+  final TextStyle? errorStyle;
+  final TextStyle? labelStyle;
   final TextInputType keyboardType;
   final AutovalidateMode? autoValidateMode;
   final List<TextInputFormatter>? inputFormatter;
   final int maxLength;
-  final int fontSize;
+  final double fontSize;
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
@@ -102,12 +115,16 @@ class ResponsiveInput extends StatefulWidget {
     Key? key,
     this.labelText,
     this.hintText,
-    this.fontSize = 26,
+    this.fontSize = 14,
     this.initialValue,
     this.controller,
     this.enabled = true,
     this.obscureText = false,
     this.autoValidateMode,
+    this.textStyle,
+    this.hintStyle,
+    this.errorStyle,
+    this.labelStyle,
     this.keyboardType = TextInputType.text,
     this.validator,
     this.maxLength = 50,
@@ -158,61 +175,69 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
       focusNode: _focus,
       onTap: widget.onTap,
       obscureText: widget.obscureText,
-      style: calculateTextStyle(
-        context,
-        textType: TextType.headline6,
-      )?.copyWith(
-        fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
-        color: _focus.hasFocus
-            ? _theme.primaryColor
-            : _theme.primaryTextTheme.bodyText1!.color,
-      ),
+      style: widget.textStyle != null
+          ? widget.textStyle!.copyWith(
+              fontSize: ResponsivityHelper.responsiveFontSize(
+                  widget.textStyle!.fontSize ?? 14),
+            )
+          : TextStyle(
+              fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
+            ),
       maxLength: widget.maxLength,
       decoration: InputDecoration(
         fillColor: _theme.inputDecorationTheme.fillColor,
         filled: true,
         isDense: widget.isDense,
         contentPadding: EdgeInsets.only(
-          left: ResponsivityHelper.horizontalUnit * 2,
-          top: ResponsivityHelper.horizontalUnit * 2,
-          bottom: ResponsivityHelper.verticalUnit,
+          left: 2.horizontalPercent(),
+          top: 2.horizontalPercent(),
+          bottom: 1.verticalPercent(),
         ),
         hintText: widget.hintText,
         labelText: widget.labelText,
-        hintStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldHint,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
-        ),
-        errorStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldError,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize - 8),
-        ),
+        hintStyle: widget.hintStyle != null
+            ? widget.hintStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.hintStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
+        errorStyle: widget.errorStyle != null
+            ? widget.errorStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.errorStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
         counter: const SizedBox.shrink(),
-        labelStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldLabel,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
-        ),
+        labelStyle: widget.labelStyle != null
+            ? widget.labelStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.labelStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(6),
           borderSide: BorderSide.none,
         ),
         prefixIconConstraints: BoxConstraints(
-          minHeight: ResponsivityHelper.verticalUnit * _iconFieldSize,
-          maxHeight: ResponsivityHelper.verticalUnit * _iconFieldSize * 2,
-          minWidth: ResponsivityHelper.verticalUnit * (_iconFieldSize + 1),
-          maxWidth: ResponsivityHelper.verticalUnit * (_iconFieldSize + 1),
+          minHeight: _iconFieldSize.verticalPercent(),
+          maxHeight: (_iconFieldSize * 2).verticalPercent(),
+          minWidth: (_iconFieldSize + 1).verticalPercent(),
+          maxWidth: (_iconFieldSize + 1).verticalPercent(),
         ),
         prefixIcon: widget.prefixIconData != null
             ? Icon(
                 widget.prefixIconData,
                 color: widget.prefixIconColor,
-                size: ResponsivityHelper.verticalUnit * _iconFieldSize,
+                size: _iconFieldSize.verticalPercent(),
               )
             : null,
         suffixIcon: widget.suffixIconData != null
@@ -225,7 +250,7 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
                 child: Icon(
                   widget.suffixIconData,
                   color: widget.iconColor ?? _theme.iconTheme.color,
-                  size: ResponsivityHelper.verticalUnit * _iconFieldSize,
+                  size: _iconFieldSize.verticalPercent(),
                 ),
               )
             : null,
@@ -249,6 +274,10 @@ class ResponsiveFormFieldButton<T> extends StatefulWidget {
     this.value,
     this.icon = Icons.arrow_drop_down,
     this.onIconTap,
+    this.textStyle,
+    this.errorStyle,
+    this.labelStyle,
+    this.hintStyle,
     required this.items,
   }) : super(key: key);
 
@@ -258,10 +287,14 @@ class ResponsiveFormFieldButton<T> extends StatefulWidget {
   final String? labelText;
   final String? hintText;
   final List<DropdownMenuItem<T>> items;
-  final int fontSize;
+  final double fontSize;
   final T? value;
   final IconData icon;
   final Function()? onIconTap;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
+  final TextStyle? errorStyle;
+  final TextStyle? labelStyle;
   @override
   _ResponsiveFormFieldButtonState<T> createState() =>
       _ResponsiveFormFieldButtonState<T>();
@@ -281,32 +314,41 @@ class _ResponsiveFormFieldButtonState<T>
           left: ResponsivityHelper.horizontalUnit / 2,
           bottom: ResponsivityHelper.verticalUnit,
         ),
-        hintStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldHint,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
-        ),
-        errorStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldError,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize - 4),
-        ),
-        labelStyle: calculateTextStyle(
-          context,
-          textType: TextType.inputFieldLabel,
-        )?.copyWith(
-          fontSize: ResponsivityHelper.responsiveFontSize(widget.fontSize),
-        ),
+        hintStyle: widget.hintStyle != null
+            ? widget.hintStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.hintStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
+        errorStyle: widget.errorStyle != null
+            ? widget.errorStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.errorStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
+        labelStyle: widget.labelStyle != null
+            ? widget.labelStyle!.copyWith(
+                fontSize: ResponsivityHelper.responsiveFontSize(
+                    widget.labelStyle!.fontSize ?? widget.fontSize),
+              )
+            : TextStyle(
+                fontSize:
+                    ResponsivityHelper.responsiveFontSize(widget.fontSize),
+              ),
       ),
       icon: Padding(
-        padding: EdgeInsets.only(right: ResponsivityHelper.horizontalUnit / 4),
+        padding: EdgeInsets.only(right: 0.25.horizontalPercent()),
         child: InkWell(
           onTap: widget.onIconTap,
           child: Icon(
             widget.icon,
-            size: ResponsivityHelper.verticalUnit * _iconFieldSize,
+            size: _iconFieldSize.verticalPercent(),
           ),
         ),
       ),
@@ -337,76 +379,5 @@ class _ResponsiveFormFieldButtonState<T>
       elevation: 2,
       style: const TextStyle(color: Colors.black),
     );
-  }
-}
-
-TextStyle? calculateTextStyle(
-  BuildContext context, {
-  TextType? textType,
-  MaterialState? materialState,
-}) {
-  final _textTheme = Theme.of(context).primaryTextTheme;
-  final _inputTheme = Theme.of(context).inputDecorationTheme;
-  final _outlinedButtonTheme = Theme.of(context).outlinedButtonTheme;
-  final _elevatedButtonTheme = Theme.of(context).elevatedButtonTheme;
-  final _popupMenuTheme = Theme.of(context).popupMenuTheme;
-
-  switch (textType) {
-    case null:
-      return null;
-
-    case TextType.subtitle1:
-      return _textTheme.subtitle1;
-
-    case TextType.subtitle2:
-      return _textTheme.subtitle2;
-    case TextType.headline1:
-      return _textTheme.headline1;
-
-    case TextType.headline2:
-      return _textTheme.headline2;
-
-    case TextType.headline3:
-      return _textTheme.headline5;
-
-    case TextType.headline4:
-      return _textTheme.headline5;
-
-    case TextType.headline5:
-      return _textTheme.headline5;
-
-    case TextType.headline6:
-      return _textTheme.headline6;
-
-    case TextType.body1:
-      return _textTheme.bodyText1;
-
-    case TextType.body2:
-      return _textTheme.bodyText2;
-
-    case TextType.caption:
-      return _textTheme.caption;
-
-    case TextType.elevatedButton:
-      return _elevatedButtonTheme.style?.textStyle?.resolve({
-        materialState ?? MaterialState.focused,
-      });
-
-    case TextType.outlinedButton:
-      return _outlinedButtonTheme.style?.textStyle?.resolve({
-        materialState ?? MaterialState.focused,
-      });
-
-    case TextType.inputFieldHint:
-      return _inputTheme.hintStyle;
-
-    case TextType.inputFieldError:
-      return _inputTheme.errorStyle;
-
-    case TextType.inputFieldLabel:
-      return _inputTheme.labelStyle;
-
-    case TextType.popupMenuItem:
-      return _popupMenuTheme.textStyle;
   }
 }

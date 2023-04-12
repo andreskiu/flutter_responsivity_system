@@ -69,7 +69,7 @@ class ResponsivityHelper {
   }
 
   static double responsiveFontSize(
-    int fontSize, {
+    double fontSize, {
     double? screenHeightPxReference,
     FontSizeMode? fontSizeMode,
   }) {
