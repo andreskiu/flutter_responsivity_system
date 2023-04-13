@@ -19,6 +19,10 @@ class ResponsivityHelper {
   static late double safeBlockHorizontal;
   static late double safeBlockVertical;
 
+  /// [referenceScreenValue]: Will adjust the font size according to the size of the screen of the design. Uses screenReferenceSize for calculations
+  /// [screenPercent]: Will adjust the font sizes according the size of the phone screen. Each point represents the 0.1% of the screen size, so a font size of 16 means the 1.6% of the screen height
+  /// [androidSPStrategy]: Will adjust the font sizes in a similar way than android devices theoretically
+  /// [devicePixelRatio]: Will multyply font size by device pixel ratio.
   static late FontSizeMode fontSizeMode;
   static late bool useDesignSizeAsReference;
   static late Size screenReferenceSize;

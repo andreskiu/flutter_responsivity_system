@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_responsivity_system/helpers/responsive_calculations.dart';
 
 class MyPainter extends CustomPainter {
   @override

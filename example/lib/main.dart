@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_responsivity_system/helpers/responsive_calculations.dart';
-import 'package:flutter_responsivity_system/widgets/device_detector_widget.dart';
-import 'package:flutter_responsivity_system/widgets/responsive_text.dart';
+import 'package:flutter_responsivity_helper/helpers/responsive_calculations.dart';
+import 'package:flutter_responsivity_helper/widgets/device_detector_widget.dart';
+import 'package:flutter_responsivity_helper/widgets/responsive_text.dart';
 
 import 'my_painter.dart';
 
