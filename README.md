@@ -11,16 +11,14 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-This package will help you to adjust your app to all screen sizes keeping its beauty in all devices.
+## Adjust your app to all screen sizes keeping its beauty in all devices.
 
-## Features
+This package will allow your widgets adjust its size using a percentage of the screen size or taking as reference the dimensions of your designer screen so your app will look similar in all devices.
 
-This package will allow your widgets adjust its size using a percentage of the screen size or taking as reference the dimensions of your designer screen.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+This package was inspired by [Daniele Cambi's post](https://medium.com/flutter-community/flutter-effectively-scale-ui-according-to-different-screen-sizes-2cb7c115ea0a). Take a look at it for more undestanding on how this package works.
 
 ## Initialization
 
