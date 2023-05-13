@@ -170,7 +170,6 @@ class _ResponsiveInputState extends State<ResponsiveInput> {
       autovalidateMode: widget.autoValidateMode,
       showCursor: true,
       readOnly: widget.readOnly,
-      cursorColor: _theme.errorColor,
       inputFormatters: widget.inputFormatter,
       focusNode: _focus,
       onTap: widget.onTap,
