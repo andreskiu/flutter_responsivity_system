@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import '../widgets/device_detector_widget.dart';
@@ -110,17 +108,17 @@ class ResponsivityHelper {
     // evaluar el reemplazar 160 * vertical unit, por el alto de las pantallas de los diseños de figma. de modo que ese sea la referencia del tamaño de letra.
     // (854 / ResponsivityHelper.screenHeight);
 
-    double _resizedFontSize = fontSize.toDouble();
-    // previous android strategy - works fine
-    if (Platform.isAndroid) {
-      final _factor = (fontSize + 1) / 10;
-      _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
-    } else {
-      final _factor = (fontSize + 5) / 10;
-      _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
-      print(ResponsivityHelper.verticalUnit);
-    }
-    return _resizedFontSize;
+    // double _resizedFontSize = fontSize.toDouble();
+    // // previous android strategy - works fine
+    // if (Platform.isAndroid) {
+    //   final _factor = (fontSize + 1) / 10;
+    //   _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
+    // } else {
+    //   final _factor = (fontSize + 5) / 10;
+    //   _resizedFontSize = _factor * ResponsivityHelper.verticalUnit;
+    //   print(ResponsivityHelper.verticalUnit);
+    // }
+    // return _resizedFontSize;
   }
 }
 
