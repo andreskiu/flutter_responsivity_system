@@ -1,3 +1,6 @@
+## 1.0.2
+* Fix assert on initialization.
+
 ## 1.0.1
 
 * Added exports to main file.

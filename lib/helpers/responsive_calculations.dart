@@ -32,8 +32,9 @@ class ResponsivityHelper {
     FontSizeMode fontSizeModeParam = FontSizeMode.devicePixelRatio,
     Size screenReferenceSizeParam = const Size(0, 0),
   })  : assert(
-            fontSizeModeParam == FontSizeMode.referenceScreenValue ||
-                screenReferenceSizeParam.height > 0.0,
+            (fontSizeModeParam != FontSizeMode.referenceScreenValue ||
+                (fontSizeModeParam == FontSizeMode.referenceScreenValue &&
+                    screenReferenceSizeParam.height > 10)),
             'if useSPForFontSize is false you must specify the screen height of the designs you are following.'),
         assert(
             !(useDesignSizeAsReference == true &&

@@ -2,26 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../helpers/responsive_calculations.dart';
 
-// enum TextType {
-//   headline1,
-//   headline2,
-//   headline3,
-//   headline4,
-//   headline5,
-//   headline6,
-//   subtitle1,
-//   subtitle2,
-//   body1,
-//   body2,
-//   caption,
-//   elevatedButton,
-//   outlinedButton,
-//   inputFieldHint,
-//   inputFieldError,
-//   inputFieldLabel,
-//   popupMenuItem
-// }
-
 class ResponsiveText extends StatelessWidget {
   final String text;
   final TextAlign? textAlign;

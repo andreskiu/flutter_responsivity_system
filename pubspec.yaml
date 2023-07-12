@@ -1,6 +1,6 @@
 name: flutter_responsivity_helper
 description: This package will help you to adjust the sizes of your widgets accordingly the size of the device that is running the app
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/andreskiu/flutter_responsivity_system
 
 environment:
